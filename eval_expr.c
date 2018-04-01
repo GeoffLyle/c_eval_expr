@@ -6,7 +6,7 @@
 /*   By: alyle <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 19:08:31 by alyle             #+#    #+#             */
-/*   Updated: 2018/04/01 00:20:16 by alyle            ###   ########.fr       */
+/*   Updated: 2018/04/01 13:06:50 by alyle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	parse_equation(char *str)
 int		eval_expr(char *str)
 {
 	int		i;
+	int		solution;
 
 	i = 0;
 	g_numptr = 0;
@@ -95,5 +96,8 @@ int		eval_expr(char *str)
 	parse_equation(str);
 	while (g_expptr > 0)
 		do_op();
-	return (g_num_arr[0]);
+	solution = g_num_arr[0];
+	free(g_num_arr);
+	free(g_exp_arr);
+	return (solution);
 }
