@@ -6,11 +6,21 @@
 /*   By: alyle <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 15:29:31 by alyle             #+#    #+#             */
-/*   Updated: 2018/03/31 21:51:46 by alyle            ###   ########.fr       */
+/*   Updated: 2018/04/01 15:32:40 by alyle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "eval_expr.h"
+
+/*
+** Global stack pointers always point the NULL value at the end of the stack.
+** When using pop, push, and peek functions the pointer moves to maintain this
+** rule.
+**
+** pop() functions return and 'remove' the value at the top of the stack.
+** push(input) functions add input to the top of the stack.
+** peek() function returns the value at the top of the stack without removal.
+*/
 
 int		pop_num(void)
 {
