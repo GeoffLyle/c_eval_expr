@@ -6,7 +6,7 @@
 /*   By: alyle <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 19:08:31 by alyle             #+#    #+#             */
-/*   Updated: 2018/04/01 13:06:50 by alyle            ###   ########.fr       */
+/*   Updated: 2018/04/04 15:08:31 by alyle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,14 @@ void	do_op(void)
 int		parse_num(char *str, int i)
 {
 	push_num(g_num_arr, ft_atoi(str, i));
+	if (str[i] == '-')
+		i++;
+	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t')
+		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
 	i--;
+	g_prevexp = 0;
 	return (i);
 }
 
@@ -60,6 +65,7 @@ void	parse_equation(char *str)
 	int		i;
 
 	i = 0;
+	g_prevexp = 1;
 	while (str[i])
 	{
 		if (str[i] >= '0' && str[i] <= '9')
@@ -69,9 +75,15 @@ void	parse_equation(char *str)
 		else if (str[i] == '+' || str[i] == '-' || str[i] == '*' ||
 				str[i] == '/' || str[i] == '%')
 		{
-			while (g_expptr > 0 && expr_value(peek_exp()) >= expr_value(str[i]))
-				do_op();
-			push_exp(g_exp_arr, str[i]);
+			if (str[i] == '-' && g_prevexp)
+				i = parse_num(str, i);
+			else
+			{
+				while (g_expptr > 0 && expr_value(peek_exp()) >= expr_value(str[i]))
+					do_op();
+				push_exp(g_exp_arr, str[i]);
+				g_prevexp = 1;
+			}
 		}
 		else if (str[i] == ')')
 		{

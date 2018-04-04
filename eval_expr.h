@@ -6,7 +6,7 @@
 /*   By: alyle <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 11:54:38 by alyle             #+#    #+#             */
-/*   Updated: 2018/03/31 22:04:01 by alyle            ###   ########.fr       */
+/*   Updated: 2018/04/04 15:00:44 by alyle            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		g_numptr;
 int		g_expptr;
 int		*g_num_arr;
 char	*g_exp_arr;
+int		g_prevexp;
 
 int		pop_num(void);
 char	pop_exp(void);
